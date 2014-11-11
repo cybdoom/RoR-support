@@ -14,10 +14,10 @@ class TicketsController < ActionController::Base
     @ticket = Ticket.new ticket_attributes
     if @ticket.save
       flash[:notice] = 'Ticket was succesfully created'
-      redirect_to :new
+      redirect_to action: 'new'
     else
       message = @ticket.errors.messages.each.map {|k, v| "#{k.to_s.humanize}: #{v.join(', ')}" }.join('<br>').html_safe
-      flash[:error] = message unless @ticket.save
+      flash[:error] = message
       redirect_to action: 'new', ticket: ticket_attributes
     end
   end
@@ -25,6 +25,10 @@ class TicketsController < ActionController::Base
   private
 
   def ticket_attributes
-    params.require(:ticket).permit(:customer_name, :customer_email, :department, :subject, :description)
+    begin
+      params.require(:ticket).permit(:customer_name, :customer_email, :department, :subject, :description)
+    rescue
+      nil
+    end
   end
 end
