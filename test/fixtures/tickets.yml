@@ -1,0 +1,10 @@
+<% 10.times do |i| %>
+  <% 10.times do |j| %>
+    ticket_<%= 10*i + j + 1 %>:
+      customer_name: <%= %w(John Bob Mark Elis Jane).sample %>
+      customer_email: <%= "dummy.email.string#{ Random.rand 100 }" %>
+      department: <%= Random.rand(2) %>
+      subject: <%= %w(War Politics Sex Money Health Work Creation).sample %>
+      description: Dummy description
+  <% end %>
+<% end %>
