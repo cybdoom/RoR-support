@@ -1,5 +1,14 @@
 = render 'shared/authentication'
-%input{type: 'email'}
-%input{type: 'select'}
-%input{type: 'text'}
-%textarea
+
+= form_for @ticket do |f|
+  Your name:
+  = f.text_field :customer_name
+  Email address:
+  = f.email_field :customer_email
+  Department:
+  = f.select :department, options_for_select(Ticket::DEPARTMENTS.each_with_index.map {|department, i| [department, i] })
+  Subject:
+  = f.text_field :subject
+  Description:
+  = f.text_area :description
+  = f.submit 'Send ticket'

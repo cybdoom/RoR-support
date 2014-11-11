@@ -6,4 +6,10 @@
     = javascript_include_tag "application", "data-turbolinks-track" => true
     = csrf_meta_tags
   %body
+    - if flash[:error]
+      .flash.error
+        = flash[:error]
+    - if flash[:notice]
+      .flash.notice
+        = flash[:notice]
     = yield
