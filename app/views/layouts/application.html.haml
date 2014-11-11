@@ -7,9 +7,9 @@
     = csrf_meta_tags
   %body
     - if flash[:error]
-      .flash.error
+      .alert.alert-danger
         = flash[:error]
     - if flash[:notice]
-      .flash.notice
+      .alert.alert-success
         = flash[:notice]
     = yield
