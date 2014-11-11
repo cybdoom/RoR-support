@@ -2,6 +2,7 @@ class CreateTickets < ActiveRecord::Migration
   def change
     create_table :tickets do |t|
       t.belongs_to :user
+      t.string :token
 
       t.string :customer_name
       t.string :customer_email
@@ -10,7 +11,7 @@ class CreateTickets < ActiveRecord::Migration
       t.string :subject
       t.string :description
 
-      t.integer :status
+      t.integer :status, default: 0
 
       t.timestamps
     end

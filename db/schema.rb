@@ -11,7 +11,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141111103947) do
+ActiveRecord::Schema.define(version: 20141111152604) do
+
+  create_table "tickets", force: true do |t|
+    t.integer  "user_id"
+    t.string   "token"
+    t.string   "customer_name"
+    t.string   "customer_email"
+    t.integer  "department"
+    t.string   "subject"
+    t.string   "description"
+    t.integer  "status",         default: 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "tickets", ["department"], name: "index_tickets_on_department"
+  add_index "tickets", ["status"], name: "index_tickets_on_status"
+  add_index "tickets", ["subject"], name: "index_tickets_on_subject"
+  add_index "tickets", ["user_id"], name: "index_tickets_on_user_id"
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
