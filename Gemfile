@@ -48,5 +48,6 @@ gem 'devise'
 
 gem 'haml-rails'
 gem 'font-awesome-rails'
+gem 'bootstrap-sass'
 
 gem 'email_validator'
