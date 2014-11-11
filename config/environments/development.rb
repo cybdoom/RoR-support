@@ -23,11 +23,10 @@ Support::Application.configure do
   config.action_mailer.smtp_settings = {
     address: "smtp.gmail.com",
     port: 587,
-    domain: "cybdoom.support.com",
     authentication: "plain",
     enable_starttls_auto: true,
   # To simplify deployment here we sacrifice some security (it is just test application)
-    user_name: 'onapp.mailer',
+    user_name: 'onapp.mailer@gmail.com',
     password: 'onapp123'
   }
 
