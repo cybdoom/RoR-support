@@ -5,8 +5,7 @@ Support::Application.routes.draw do
 
   root 'welcome#index'
 
-  get 'tickets/new' => 'tickets#new'
-  get 'tickets/index' => 'tickets#index'
+  resources :tickets
 
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
