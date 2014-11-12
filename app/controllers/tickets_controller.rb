@@ -8,6 +8,7 @@ class TicketsController < ActionController::Base
   end
 
   def index
+    @tickets = Ticket.all
   end
 
   def create
@@ -20,6 +21,13 @@ class TicketsController < ActionController::Base
       flash[:error] = message
       redirect_to action: 'new', ticket: ticket_attributes
     end
+  end
+
+  def update
+    puts params
+    @ticket = Ticket.find params[:id]
+    @ticket.send("#{ params[:field] }=".to_sym, params[:newValue])
+    render nothing: true, status: @ticket.save ? 200 : 500
   end
 
   private

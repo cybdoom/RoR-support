@@ -4,7 +4,7 @@
     %ul.status
       %li.dropdown
         %a.dropdown-toggle{ href: "#", 'data-toggle' => "dropdown" }
-          %i.fa{ class: ticket.status_icon_class, title: ticket.status_name, value: ticket.status }
+          %i.fa.status-icon{ class: ticket.status_icon_class, title: ticket.status_name, value: ticket.status }
           %ul.dropdown-menu
             = render 'shared/ticket_status_options'
     %i.fa.fa-paperclip{ title: ticket.token }
