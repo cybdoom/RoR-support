@@ -1,8 +1,9 @@
-- if user_signed_in?
-  = link_to(:destroy_user_session, method: 'delete') do
-    %i.fa.fa-sign-out{ title: 'Sign out' }
-- else
-  = link_to :new_user_session do
-    %i.fa.fa-sign-in{ title: 'Sign in' }
-= link_to :root do
-  %i.fa.fa-home{ title: 'Home' }
+.top-panel
+  - if user_signed_in?
+    = link_to(:destroy_user_session, method: 'delete') do
+      %i.fa.fa-sign-out{ title: 'Sign out' }
+  - else
+    = link_to :new_user_session do
+      %i.fa.fa-sign-in{ title: 'Sign in' }
+  = link_to :root do
+    %i.fa.fa-home{ title: 'Home' }

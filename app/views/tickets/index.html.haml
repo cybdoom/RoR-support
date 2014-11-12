@@ -1,1 +1,25 @@
-Tickets list here
+.tickets-panels
+  .panel.panel-danger
+    .panel-heading
+      UNASSIGNED
+    .panel-body
+      = render @tickets
+
+  .panel.panel-warning
+    .panel-heading
+      OPENED
+    .panel-body
+      = render @tickets
+
+  .panel.panel-info
+    .panel-heading
+      FROZEN
+    .panel-body
+      = render @tickets
+
+  .panel.panel-success
+    .panel-heading
+      CLOSED
+    .panel-body
+      = render @tickets
+

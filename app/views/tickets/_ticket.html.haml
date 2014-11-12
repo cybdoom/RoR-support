@@ -1,0 +1,16 @@
+.ticket-entry
+  .ticket-table
+    %i.fa.fa-trash
+    %i.fa.fa-paperclip
+    .department
+      %span
+        = ticket.department_name
+    %div
+      .subject
+        = ticket.subject
+    %ul.owner{ title: "Owner: #{ ticket.user.email }" }
+      %li.dropdown
+        %a.dropdown-toggle{ href: "#", 'data-toggle' => "dropdown" }
+          %i.fa.fa-user
+          %ul.dropdown-menu
+            = render User.all
