@@ -6,5 +6,6 @@
       department: <%= Random.rand(2) %>
       subject: <%= %w(War Politics Sex Money Health Work Creation).sample %>
       description: Dummy description
+      user: user_<%= 1 + Random.rand(9) %>
   <% end %>
 <% end %>
