@@ -12,4 +12,5 @@
     - if flash[:notice]
       .alert.alert-success
         = flash[:notice]
+    = render 'shared/top_panel'
     = yield

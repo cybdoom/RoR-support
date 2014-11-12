@@ -4,18 +4,23 @@
 @import variables
 @import tickets
 
-body
-  background: linear-gradient(#8FBC8F, #ADFF2F, #8FBC8F)
+html
+  width: 100%
+  height: 100%
 
-.fa.sign
+  body
+    background: linear-gradient($dark_gray, $darked_orange, $dark_gray)
+
+.fa
   font-size: 40px
+  color: black
+
+.fa:hover
+  color: $darked_orange
+
+.fa-sign-in, .fa-sign-out, .fa-home
   float: right
-
-.fa.sign.fa-sign-in
-  color: green
-
-.fa.sign.fa-sign-out
-  color: red
+  padding: 10px
 
 .alert
   text-align: center

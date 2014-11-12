@@ -1,6 +1,0 @@
-- if user_signed_in?
-  = link_to(:destroy_user_session, method: 'delete') do
-    %i.sign.fa.fa-sign-out{ title: 'Sign out' }
-- else
-  = link_to :new_user_session do
-    %i.sign.fa.fa-sign-in{ title: 'Sign in' }
