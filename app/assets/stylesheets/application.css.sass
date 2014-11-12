@@ -3,6 +3,7 @@
 @import font-awesome
 @import variables
 @import tickets
+@import top_panel
 
 html
   width: 100%
@@ -10,17 +11,6 @@ html
 
   body
     background: linear-gradient($dark_gray, $darked_orange, $dark_gray)
-
-.fa
-  font-size: 40px
-  color: black
-
-.fa:hover
-  color: $darked_orange
-
-.fa-sign-in, .fa-sign-out, .fa-home
-  float: right
-  padding: 10px
 
 .alert
   text-align: center
@@ -35,7 +25,7 @@ textarea
   display: block
   color: black
 
-.panel
+.panel.panel-custom
   color: $darked_orange
   width: 330px
   margin: auto
