@@ -21,11 +21,18 @@
     display: table
     width: 100%
 
+    a
+      text-decoration: none
+
     .fa
       font-size: 25px
       display: table-cell
       width: 25px
       color: black
+
+    .ticket-status
+      .fa
+        display: inline-block
 
     .fa-paperclip
       color: gray
@@ -38,7 +45,7 @@
       color: $darked_orange
       border-radius: 8px
 
-    .owner
+    .owner, .status
       padding: 0
       display: table-cell
       width: 25px
@@ -47,5 +54,8 @@
 
     .subject
       text-align: center
+
+  .description
+    display: none
 
 
