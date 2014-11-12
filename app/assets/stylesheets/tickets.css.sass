@@ -10,52 +10,44 @@
     .panel-body
       padding: 0
 
-.ticket-entry
-  background: $light_gray
-  height: 40px
-  padding: 5px
-  border-bottom: 1px solid $darked_orange
-  border-radius: 5px
+    .ticket-entry
+      height: 40px
+      border-bottom: 2px solid $light_gray
+      border-radius: 5px
 
-  .ticket-table
-    display: table
-    width: 100%
+      .ticket-table
+        border-spacing: 10px
+        display: table
+        height: 100%
+        width: 100%
 
-    a
-      text-decoration: none
+        .fa
+          font-size: 25px
+          color: black
 
-    .fa
-      font-size: 25px
-      display: table-cell
-      width: 25px
-      color: black
+        .fa.fa-paperclip
+          width: 25px
+          padding: 0
+          color: gray
 
-    .ticket-status
-      .fa
-        display: inline-block
+        .cell
+          display: table-cell
+          text-align: center
 
-    .fa-paperclip
-      color: gray
+        ul.cell
+          list-style: none
+          width: 25px
+          padding: 0
+          text-decoration: none
 
-    .department
-      text-align: center
-      display: table-cell
-      width: 150px
-      background: $gray
-      color: $darked_orange
-      border-radius: 8px
+        .department
+          width: 150px
+          background: $gray
+          color: white
+          border-radius: 8px
 
-    .owner, .status
-      padding: 0
-      display: table-cell
-      width: 25px
-      height: 30px
-      list-style: none
+      .description
+        display: none
 
-    .subject
-      text-align: center
-
-  .description
-    display: none
-
-
+    .ticket-entry:hover
+      background: $light_green

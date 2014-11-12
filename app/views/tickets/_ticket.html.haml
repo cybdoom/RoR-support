@@ -1,20 +1,19 @@
 .ticket-entry
   = hidden_field_tag :id, ticket.id
   .ticket-table
-    %ul.status
+    %ul.cell
       %li.dropdown
         %a.dropdown-toggle{ href: "#", 'data-toggle' => "dropdown" }
-          %i.fa.status-icon{ class: ticket.status_icon_class, title: ticket.status_name, value: ticket.status }
+          %i.fa{ class: ticket.status_icon_class, title: ticket.status_name, value: ticket.status }
           %ul.dropdown-menu
             = render 'shared/ticket_status_options'
-    %i.fa.fa-paperclip{ title: ticket.token }
-    .department
+    %i.cell.fa.fa-paperclip{ title: ticket.token }
+    .department.cell
       %span
         = ticket.department_name
-    %div
-      .subject
-        = ticket.subject
-    %ul.owner
+    .subject.cell
+      = ticket.subject
+    %ul.cell
       %li.dropdown
         %a.dropdown-toggle{ href: "#", 'data-toggle' => "dropdown" }
           %i.fa.fa-user{ title: ticket.user.present? ? "Owner: #{ ticket.user.enail }" : "Unassigned" }

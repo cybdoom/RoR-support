@@ -1,5 +1,5 @@
 - Ticket::STATUSES.each_with_index do |status, i|
-  %li.ticket-status
-    %a{ href: "#" }
+  %li
+    %a.ticket-status-option{ href: "#" }
       %i.fa{ class: Ticket::STATUS_ICONS[i], value: i }
       = status
