@@ -1,14 +1,18 @@
 = render 'shared/authentication'
 
 = form_for @ticket do |f|
-  Your name:
-  = f.text_field :customer_name
-  Email address:
-  = f.email_field :customer_email
-  Department:
-  = f.select :department, options_for_select(Ticket::DEPARTMENTS.each_with_index.map {|department, i| [department, i] })
-  Subject:
-  = f.text_field :subject
-  Description:
-  = f.text_area :description
-  = f.submit 'Send ticket'
+  .panel
+    .panel-heading
+      Here You can describe Your issue
+    .panel-body
+      %span Your name:
+      = f.text_field :customer_name
+      %span Email address:
+      = f.email_field :customer_email
+      %span Department:
+      = f.select :department, options_for_select(Ticket::DEPARTMENTS.each_with_index.map {|department, i| [department, i] })
+      %span Subject:
+      = f.text_field :subject
+      %span Description:
+      = f.text_area :description, size: '40x5'
+      = f.submit 'Send ticket', class: "btn btn-success"
