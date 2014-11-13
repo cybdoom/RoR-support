@@ -14,6 +14,7 @@ class TicketsController < ActionController::Base
     @ticket = Ticket.new ticket_attributes
     if @ticket.save
       flash[:notice] = 'Ticket was succesfully created'
+      CustomerMailer.ticket_created(@ticket).deliver
       redirect_to action: 'new'
     else
       message = error_message @tichet

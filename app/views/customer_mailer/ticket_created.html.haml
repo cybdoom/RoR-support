@@ -1,0 +1,12 @@
+!!!
+%html
+  %head
+    Ticket was successfully created
+  %body
+    You've create the ticket for OnApp stuff
+    Your ticket's unique code is:
+    %b= @ticket.token
+    To watch the ticket's progress You can use
+    %a{ href: ticket_url(@ticket) }
+      this
+    \ url
