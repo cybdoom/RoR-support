@@ -3,6 +3,7 @@ class CreateComments < ActiveRecord::Migration
     create_table :comments do |t|
       t.belongs_to :ticket
 
+      t.string :text
       t.integer :order
       t.reply :boolean
 
