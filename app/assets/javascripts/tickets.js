@@ -1,5 +1,5 @@
 $(function() {
-  $(".dropdown-menu").on('click', 'li a', function(){
+  $(".dropdown-menu").on('click', 'li a', function(e){
     var GetUpdateDetails = function(element) {
       return {
         field: $(element).attr('class').split('-')[1],
@@ -27,5 +27,14 @@ $(function() {
         data: data,
         success: OnTicketUpdateSuccess
     });
+  });
+
+  $('.dropdown').click(function(e) {
+    $(this).find('a.dropdown-toggle').first().dropdown('toggle');
+    e.stopPropagation();
+  });
+
+  $(".ticket-entry").on('click', function() {
+    $(this).find('.description').slideToggle(256);
   });
 });
