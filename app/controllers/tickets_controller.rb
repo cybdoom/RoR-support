@@ -1,14 +1,13 @@
 class TicketsController < ActionController::Base
   layout 'application'
 
-  before_action :authenticate_user!, only: [:index]
+  before_action :authenticate_user!, only: [:index, :update]
 
   def new
     @ticket = Ticket.new ticket_attributes
   end
 
   def index
-    @tickets = Ticket.all
   end
 
   def create
@@ -34,6 +33,21 @@ class TicketsController < ActionController::Base
     }, status: @ticket.save ? 200 : 500
   end
 
+  def comment
+    @ticket = Ticket.find params[:id]
+
+    @comment = Comment.new comment_attributes
+    @comment.ticket_id = @ticket.id
+    @comment.order = @ticket.comments.count
+    @comment.reply = user_signed_in?
+
+    if @comment.save
+      render @comment
+    else
+      render nothing: true
+    end
+  end
+
   private
 
   def error_message record
@@ -46,5 +60,9 @@ class TicketsController < ActionController::Base
     rescue
       nil
     end
+  end
+
+  def comment_attributes
+    params.require(:comment).permit(:text)
   end
 end
