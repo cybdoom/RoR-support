@@ -54,9 +54,12 @@ $(function() {
   $("button").on('click', function() {
     var ticketId = $(this).attr('id');
     var text = $(this).parents('.comments').find('textarea').val();
+    var self = this;
 
     var OnCommentSuccess = function(response) {
-      console.log(response);
+      console.log($(self).parents('.comments-list'));
+      $(self).parents('.comments').find('.comments-list').append(response);
+      $(self).parents('.comments').find('textarea').val('');
     };
 
     $.ajax({
