@@ -2,6 +2,7 @@ class Ticket < ActiveRecord::Base
   include Tokenable
 
   belongs_to :user
+  has_many :comments
 
   scope :unassigned, -> { where(user_id: nil) }
   scope :opened, -> { where("status = 0 or status = 1") }
