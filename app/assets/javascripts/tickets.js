@@ -42,12 +42,28 @@ $(function() {
     });
   });
 
-  $('.dropdown').click(function(e) {
+  $('.dropdown, textarea, button').click(function(e) {
     $(this).find('a.dropdown-toggle').first().dropdown('toggle');
     e.stopPropagation();
   });
 
   $(".ticket-entry").on('click', function() {
     $(this).find('.details').slideToggle(256);
+  });
+
+  $("button").on('click', function() {
+    var ticketId = $(this).attr('id');
+    var text = $(this).parents('.comments').find('textarea').val();
+
+    var OnCommentSuccess = function(response) {
+      console.log(response);
+    };
+
+    $.ajax({
+      url: '/tickets/' + ticketId + '/comment',
+      data: { comment: { text: text }},
+      method: "POST",
+      success: OnCommentSuccess
+    });
   });
 });
