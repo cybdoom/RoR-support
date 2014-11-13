@@ -19,6 +19,11 @@
           %i.ticket-user_id-icon.fa.fa-user{ title: ticket.user.present? ? "Owner: #{ ticket.user.email }" : "Unassigned" }
           %ul.dropdown-menu
             = render User.all
-  .description
-    %textarea{ readonly: true }
+  .details
+    .from
+      From:
+      = "#{ ticket.customer_name } <#{ ticket.customer_email }>"
+
+    .description
       = ticket.description
+

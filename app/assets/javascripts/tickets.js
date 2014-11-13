@@ -48,6 +48,6 @@ $(function() {
   });
 
   $(".ticket-entry").on('click', function() {
-    $(this).find('.description').slideToggle(256);
+    $(this).find('.details').slideToggle(256);
   });
 });

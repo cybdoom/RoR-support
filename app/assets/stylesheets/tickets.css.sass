@@ -6,6 +6,7 @@
 
   .panel
     display: table-cell
+    width: 25%
 
     .panel-body
       padding: 0
@@ -45,12 +46,17 @@
           color: white
           border-radius: 8px
 
-      .description
+      .details
         display: none
+        padding: 5px
 
-        textarea
-          width: 100%
-          resize: none
+        .from
+          padding-bottom: 5px
 
-    .ticket-entry:hover
-      background: $light_green
+        .description
+          padding: 5px
+          border-radius: 5px
+          background: $light_gray
+
+    .ticket-table:hover
+      background: bisque
