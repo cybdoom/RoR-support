@@ -4,7 +4,6 @@ class CreateComments < ActiveRecord::Migration
       t.belongs_to :ticket
 
       t.string :text
-      t.integer :order
       t.boolean :reply
 
       t.timestamps

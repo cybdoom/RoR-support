@@ -29,7 +29,7 @@
 
     .comments
       .comments-list
-        = render ticket.comments
+        = render ticket.comments.order(:created_at)
 
       %textarea{ required: true, pattern: ".{,512}", placeholder: "Leave Your #{ user_signed_in? ? "answer" : "comment" } here" }
 

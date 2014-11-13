@@ -38,7 +38,6 @@ class TicketsController < ActionController::Base
 
     @comment = Comment.new comment_attributes
     @comment.ticket_id = @ticket.id
-    @comment.order = @ticket.comments.count
     @comment.reply = user_signed_in?
 
     if @comment.save
