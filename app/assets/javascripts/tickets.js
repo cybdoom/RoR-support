@@ -57,7 +57,6 @@ $(function() {
     var self = this;
 
     var OnCommentSuccess = function(response) {
-      console.log($(self).parents('.comments-list'));
       $(self).parents('.comments').find('.comments-list').append(response);
       $(self).parents('.comments').find('textarea').val('');
     };

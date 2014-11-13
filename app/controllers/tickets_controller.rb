@@ -2,12 +2,17 @@ class TicketsController < ActionController::Base
   layout 'application'
 
   before_action :authenticate_user!, only: [:index, :update]
+  before_action :ensure_signed_out, only: [:show]
 
   def new
     @ticket = Ticket.new ticket_attributes
   end
 
   def index
+  end
+
+  def show
+    @ticket = Ticket.find(params[:id])
   end
 
   def create
@@ -17,7 +22,7 @@ class TicketsController < ActionController::Base
       CustomerMailer.ticket_created(@ticket).deliver
       redirect_to action: 'new'
     else
-      message = error_message @tichet
+      message = error_message @ticket
       flash[:error] = message
       redirect_to action: 'new', ticket: ticket_attributes
     end
@@ -44,11 +49,16 @@ class TicketsController < ActionController::Base
     if @comment.save
       render @comment
     else
+      puts @comment.errors.messages
       render nothing: true
     end
   end
 
   private
+
+  def ensure_signed_out
+    sign_out current_user if user_signed_in?
+  end
 
   def error_message record
     record.errors.messages.each.map {|k, v| "#{k.to_s.humanize}: #{v.join(', ')}" }.join('<br>').html_safe
