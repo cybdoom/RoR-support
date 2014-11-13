@@ -5,7 +5,7 @@ class CreateComments < ActiveRecord::Migration
 
       t.string :text
       t.integer :order
-      t.reply :boolean
+      t.boolean :reply
 
       t.timestamps
     end
