@@ -3,23 +3,23 @@
     .panel-heading
       UNASSIGNED
     .panel-body
-      = render @tickets
+      = render Ticket.unassigned
 
   .panel.panel-warning
     .panel-heading
       OPENED
     .panel-body
-      = render @tickets
+      = render Ticket.opened
 
   .panel.panel-info
     .panel-heading
       FROZEN
     .panel-body
-      = render @tickets
+      = render Ticket.frozen
 
   .panel.panel-success
     .panel-heading
       CLOSED
     .panel-body
-      = render @tickets
+      = render Ticket.closed
 

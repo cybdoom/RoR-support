@@ -3,6 +3,11 @@ class Ticket < ActiveRecord::Base
 
   belongs_to :user
 
+  scope :unassigned, -> { where(user_id: nil) }
+  scope :opened, -> { where("status = 0 or status = 1") }
+  scope :frozen, -> { where(status: 2) }
+  scope :closed, -> { where("status = 3 or status = 4") }
+
   DEPARTMENTS = ['some department', 'second department', 'other department']
   STATUSES = ['Waiting for Staff Response', 'Waiting for Customer', 'On Hold', 'Cancelled', 'Completed']
   STATUS_ICONS = %w(fa-wrench fa-reply fa-clock-o fa-trash fa-check-circle-o)
