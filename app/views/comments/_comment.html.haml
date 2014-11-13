@@ -1,0 +1,5 @@
+.comment{ class: comment.reply ? 'reply' : '' }
+  .comment-header
+    = comment.created_at.strftime("%B %d, %Y, %A")
+  .comment-body
+    = comment.text
