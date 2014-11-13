@@ -17,20 +17,28 @@ class TicketsController < ActionController::Base
       flash[:notice] = 'Ticket was succesfully created'
       redirect_to action: 'new'
     else
-      message = @ticket.errors.messages.each.map {|k, v| "#{k.to_s.humanize}: #{v.join(', ')}" }.join('<br>').html_safe
+      message = error_message @tichet
       flash[:error] = message
       redirect_to action: 'new', ticket: ticket_attributes
     end
   end
 
   def update
-    puts params
     @ticket = Ticket.find params[:id]
-    @ticket.send("#{ params[:field] }=".to_sym, params[:newValue])
-    render nothing: true, status: @ticket.save ? 200 : 500
+    @ticket.send("#{ params[:field] }=".to_sym, params[:value])
+    render json: {
+      field: params[:field],
+      value: params[:value],
+      iconClass: params[:field] == 'user_id' ? 'fa-user' : Ticket::STATUS_ICONS[params[:value].to_i],
+      title: params[:field] == 'user_id' ? "Owner: #{ User.find(params[:value].to_i).email }" : Ticket::STATUSES[params[:value].to_i]
+    }, status: @ticket.save ? 200 : 500
   end
 
   private
+
+  def error_message record
+    record.errors.messages.each.map {|k, v| "#{k.to_s.humanize}: #{v.join(', ')}" }.join('<br>').html_safe
+  end
 
   def ticket_attributes
     begin

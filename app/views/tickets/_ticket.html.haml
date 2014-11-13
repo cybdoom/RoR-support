@@ -4,7 +4,7 @@
     %ul.cell
       %li.dropdown
         %a.dropdown-toggle{ href: "#", 'data-toggle' => "dropdown" }
-          %i.fa{ class: ticket.status_icon_class, title: ticket.status_name, value: ticket.status }
+          %i.ticket-status-icon.fa{ class: ticket.status_icon_class, title: ticket.status_name, value: ticket.status }
           %ul.dropdown-menu
             = render 'shared/ticket_status_options'
     %i.cell.fa.fa-paperclip{ title: ticket.token }
@@ -16,7 +16,7 @@
     %ul.cell
       %li.dropdown
         %a.dropdown-toggle{ href: "#", 'data-toggle' => "dropdown" }
-          %i.fa.fa-user{ title: ticket.user.present? ? "Owner: #{ ticket.user.enail }" : "Unassigned" }
+          %i.ticket-user_id-icon.fa.fa-user{ title: ticket.user.present? ? "Owner: #{ ticket.user.email }" : "Unassigned" }
           %ul.dropdown-menu
             = render User.all
   .description

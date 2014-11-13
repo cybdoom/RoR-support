@@ -1,27 +1,30 @@
 $(function() {
   $(".dropdown-menu").on('click', 'li a', function(){
-    var clickedIcon = $(this).find('i'),
-        icon = $(this).parents(".status").find(".status-icon"),
-        selectedClass = (new RegExp('fa-[^ ]*')).exec(clickedIcon.attr('class'))[0],
-        title = clickedIcon.parent().text(),
-        newValue = clickedIcon.attr('value'),
-        ticketId = icon.parents('.ticket-entry').find('input').val(),
-        updatedField = icon.parents("ul.status").length > 0 ? "status" : "user_id";
-
-    var OnTicketUpdateSuccess = function() {
-      icon.removeClass().addClass('fa ' + selectedClass).attr('title', title).attr('value', newValue);
-      moveTicket
+    var GetUpdateDetails = function(element) {
+      return {
+        field: $(element).attr('class').split('-')[1],
+        ticketEntry: $(element).parents('.ticket-entry')
+      }
     }
 
-    var updateData = {
-      field: updatedField,
-      newValue: newValue
-    };
+    var OnTicketUpdateSuccess = function(response) {
+      updateDetails.ticketEntry.find('.ticket-' + response.field + '-icon')
+        .removeClass()
+        .addClass('fa ' + response.iconClass)
+        .attr('title', response.title);
+    }
+
+    var updateDetails = GetUpdateDetails(this);
+    var updatingTicketId = updateDetails.ticketEntry.find('input').val();
+    var data = {
+      field: updateDetails.field,
+      value: $(this).find('i').attr('value')
+    }
 
     $.ajax({
-        url: '/tickets/' + ticketId,
+        url: '/tickets/' + updatingTicketId,
         method: "PATCH",
-        data: updateData,
+        data: data,
         success: OnTicketUpdateSuccess
     });
   });
