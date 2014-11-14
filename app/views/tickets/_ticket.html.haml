@@ -1,4 +1,4 @@
-.ticket-entry
+.ticket-entry{ class: user_signed_in? ? '' : 'readonly' }
   = hidden_field_tag :id, ticket.id
   .ticket-table
     %ul.cell
@@ -31,7 +31,7 @@
       .comments-list
         = render ticket.comments.order(:created_at)
 
-      %textarea{ required: true, pattern: ".{,512}", placeholder: "Leave Your #{ user_signed_in? ? "answer" : "comment" } here" }
+      %textarea{ required: true, pattern: ".{1,512}", placeholder: "Leave Your #{ user_signed_in? ? "answer" : "comment" } here" }
 
       %button{ id: ticket.id }
         Done

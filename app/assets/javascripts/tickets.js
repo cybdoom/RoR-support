@@ -43,8 +43,9 @@ $(function() {
   });
 
   $('.dropdown, textarea, button').click(function(e) {
-    $(this).find('a.dropdown-toggle').first().dropdown('toggle');
     e.stopPropagation();
+    if ($(this).prop('tagName') != 'BUTTON' && $(this).parents('.ticket-entry').hasClass('readonly')) return;
+    $(this).find('a.dropdown-toggle').first().dropdown('toggle');
   });
 
   $(".ticket-entry").on('click', function() {
@@ -52,9 +53,9 @@ $(function() {
   });
 
   $("button").on('click', function() {
-    var ticketId = $(this).attr('id');
-    var text = $(this).parents('.comments').find('textarea').val();
-    var self = this;
+    var ticketId = $(this).attr('id'),
+        text = $(this).parents('.comments').find('textarea').val(),
+        self = this;
 
     var OnCommentSuccess = function(response) {
       $(self).parents('.comments').find('.comments-list').append(response);
