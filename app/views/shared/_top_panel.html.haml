@@ -1,5 +1,9 @@
 .top-panel
   - if user_signed_in?
+    = form_tag( action: 'search' ) do
+      = text_field_tag :search_key, nil, required: true
+      %button{ type: "submit" }
+        %i.fa.fa-search
     = link_to(:destroy_user_session, method: 'delete') do
       %i.fa.fa-sign-out{ title: 'Sign out' }
   - else

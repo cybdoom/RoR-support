@@ -1,0 +1,5 @@
+- if @tickets.try(:any?)
+  = render @tickets
+- else
+  .empty-search-result
+    No tickets found

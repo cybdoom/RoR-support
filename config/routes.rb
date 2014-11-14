@@ -9,6 +9,8 @@ Support::Application.routes.draw do
 
   post 'tickets/:id/comment' => 'tickets#comment'
 
+  post 'search' => 'tickets#search'
+
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
 

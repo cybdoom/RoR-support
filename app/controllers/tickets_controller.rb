@@ -1,7 +1,7 @@
 class TicketsController < ActionController::Base
   layout 'application'
 
-  before_action :authenticate_user!, only: [:index, :update]
+  before_action :authenticate_user!, only: [:index, :update, :search]
   before_action :ensure_signed_out, only: [:show]
 
   def new
@@ -53,6 +53,13 @@ class TicketsController < ActionController::Base
     else
       render nothing: true
     end
+  end
+
+  def search
+    key = params[:search_key]
+    search_mask = "subject LIKE '%#{ key }%' OR description LIKE '%#{ key }%' OR token LIKE '%#{ key }%'"
+    @tickets = Ticket.where(search_mask)
+    puts @tickets
   end
 
   private
