@@ -31,6 +31,7 @@ class TicketsController < ActionController::Base
   def update
     @ticket = Ticket.find params[:id]
     @ticket.send("#{ params[:field] }=".to_sym, params[:value])
+
     render json: {
       field: params[:field],
       value: params[:value],
@@ -47,9 +48,9 @@ class TicketsController < ActionController::Base
     @comment.reply = user_signed_in?
 
     if @comment.save
+      CustomerMailer.ticket_commented(@ticket, @comment).deliver if @comment.reply
       render @comment
     else
-      puts @comment.errors.messages
       render nothing: true
     end
   end

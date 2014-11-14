@@ -1,0 +1,13 @@
+!!!
+%html
+  %head
+    Ticket was commented
+  %body
+    Your ticket (
+    %b= @ticket.token
+    ) was commented:
+    = @comment.text
+    To watch the ticket You can use
+    %a{ href: ticket_url(@ticket) }
+      this
+    \ url

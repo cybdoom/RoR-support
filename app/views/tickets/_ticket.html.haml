@@ -21,7 +21,8 @@
             = render User.all
   .details
     .from
-      From:
+      %b
+        From:
       = "#{ ticket.customer_name } <#{ ticket.customer_email }>"
 
     .description
