@@ -1,11 +1,14 @@
 class TicketsController < ActionController::Base
   layout 'application'
 
+  respond_to :html, :json
+
   before_action :authenticate_user!, only: [:index, :update, :search]
   before_action :ensure_signed_out, only: [:show]
 
   def new
     @ticket = Ticket.new ticket_attributes
+    respond_with @ticket
   end
 
   def index
@@ -13,6 +16,7 @@ class TicketsController < ActionController::Base
 
   def show
     @ticket = Ticket.find(params[:id])
+    respond_with @ticket
   end
 
   def create
@@ -22,7 +26,7 @@ class TicketsController < ActionController::Base
       CustomerMailer.ticket_created(@ticket).deliver
       redirect_to action: 'new'
     else
-      message = error_message @ticket
+      message = @ticket.errors.full_messages.join('<br>').html_safe
       flash[:error] = message
       redirect_to action: 'new', ticket: ticket_attributes
     end
@@ -30,14 +34,9 @@ class TicketsController < ActionController::Base
 
   def update
     @ticket = Ticket.find params[:id]
-    @ticket.send("#{ params[:field] }=".to_sym, params[:value])
+    @ticket.update_attributes ticket_attributes
 
-    render json: {
-      field: params[:field],
-      value: params[:value],
-      iconClass: params[:field] == 'user_id' ? 'fa-user' : Ticket::STATUS_ICONS[params[:value].to_i],
-      title: params[:field] == 'user_id' ? "Owner: #{ User.find(params[:value].to_i).email }" : Ticket::STATUSES[params[:value].to_i]
-    }, status: @ticket.save ? 200 : 500
+    render @ticket
   end
 
   def comment
@@ -56,10 +55,8 @@ class TicketsController < ActionController::Base
   end
 
   def search
-    key = params[:search_key]
-    search_mask = "subject LIKE '%#{ key }%' OR description LIKE '%#{ key }%' OR token LIKE '%#{ key }%'"
-    @tickets = Ticket.where(search_mask)
-    puts @tickets
+    @tickets = Ticket.search_by_key search_params
+    respond_with @tickets
   end
 
   private
@@ -68,13 +65,9 @@ class TicketsController < ActionController::Base
     sign_out current_user if user_signed_in?
   end
 
-  def error_message record
-    record.errors.messages.each.map {|k, v| "#{k.to_s.humanize}: #{v.join(', ')}" }.join('<br>').html_safe
-  end
-
   def ticket_attributes
     begin
-      params.require(:ticket).permit(:customer_name, :customer_email, :department, :subject, :description)
+      params.require(:ticket).permit(:customer_name, :customer_email, :department, :subject, :description, :status)
     rescue
       nil
     end
@@ -82,5 +75,9 @@ class TicketsController < ActionController::Base
 
   def comment_attributes
     params.require(:comment).permit(:text)
+  end
+
+  def search_params
+    params.require(:search_key)
   end
 end
